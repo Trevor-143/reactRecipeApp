@@ -5,8 +5,8 @@ const Home = () => {
     return (
         <>
             <div>
-                <Vegie />
                 <Popular />
+                <Vegie />
             </div>
         </>
     )
