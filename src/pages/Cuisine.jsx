@@ -16,19 +16,9 @@ function Cuisine() {
   }, [params.type])
 
   const getCuisine = async (name) => {
-
-    const store = localStorage.getItem('cuisine')
-
-    if(store) {
-      setCuisine(JSON.parse(store))
-    } else {
-      const data = await fetch (`https://api.spoonacular.com/recipes/complexSearch?apiKey={apiKey}&cuisine=${name}&number=18`)
-      const recipes = await data.json()
-
-      localStorage.setItem('cuisine', JSON.stringify(recipes.results))
-      setCuisine(recipes.results)
-    }
-
+    const data = await fetch (`https://api.spoonacular.com/recipes/complexSearch?apiKey=948780b90e614431baba9b1f90a1674f&cuisine=${name}&number=18`)
+    const recipes = await data.json()
+    setCuisine(recipes.results)
     
   }
 
@@ -63,10 +53,11 @@ const Grid = styled(motion.div )`
 const Card = styled.div `
   img {
     width: 100%;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
   }
   a {
     text-decoration: none;
+    color: #000;
   }
   h4 {
     text-align: center;

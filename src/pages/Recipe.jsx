@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import styled from "styled-components"
 import { useParams } from "react-router-dom"
 import { motion } from "framer-motion"
+import { BiDish } from "react-icons/bi";
 
 
 const Recipe = () => {
@@ -16,9 +17,10 @@ const Recipe = () => {
     }, [params.id])
 
     const getRecipe = async () => {
-        const res = await fetch(`https://api.spoonacular.com/recipes/${params.id}/information?apiKey={apiKey}`)
+        const res = await fetch(`https://api.spoonacular.com/recipes/${params.id}/information?apiKey=948780b90e614431baba9b1f90a1674f`)
         const data = await res.json()
         console.log(data)
+        setRecipe(data)
     }
 
 
@@ -31,22 +33,27 @@ const Recipe = () => {
           transition={{duration: 0.5}}
           >
             <div>
+                <img src={recipe.image} alt={recipe.title} />
                 <h2> {recipe.title} </h2>
-                <img scr={recipe.image} alt={recipe.title} />
+                <p dangerouslySetInnerHTML = {{ __html: recipe.summary}} ></p>
             </div>
             <Info>
                 <Button className = { activeTab === 'Instructions' ? 'active' : '' } onClick = {() => setActiveTab('Instructions') } >Instructions</Button>
                 <Button className = { activeTab === 'Ingredients' ? 'active' : '' } onClick = {() => setActiveTab('Ingredients') } >Ingredients</Button>
                 { activeTab === 'Instructions' && (
                     <div>
-                        <p> dengerouslySetInnerHTML={{__html: recipe.summary}}</p>
-                        <p> dengerouslySetInnerHTML={{__html: recipe.instructions}} </p>
+                        <p dangerouslySetInnerHTML = {{ __html: recipe.instructions}} ></p>
                     </div>
                 ) }
                 { activeTab === 'Ingredients' && (
                     <ul>
                         {recipe.extendedIngredients.map((ingredient) => {
-                            <li key={ingredient.id}> {ingredient.original} </li>
+                            return (
+                                <li key={ingredient.id}>
+                                    <BiDish />
+                                    <h3>{ingredient.original}</h3>
+                                </li>
+                            )
                         })}
                     </ul>
                 ) }
@@ -56,37 +63,66 @@ const Recipe = () => {
 }
 
 const DetailedWraper = styled(motion.div) `
-    margin-top: 10rem;
-    margin-bottom: 5rem;
-    display: flex;
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 
+    img {
+        width: 100%;
+        border-radius: 0.5rem;
+    }
+    p {
+        font-size: 13px;
+        a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #ff0000;
+        }
+    }
     .active {
         background: #000;
-        color: $fff;
+        color: #fff;
     }
     h2 {
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
+        font-size: 15px;
     }
     li {
-        font-size: 1.2rem;
-        line-height: 2.5rem;
-    }
-    ul {
-        margin-top: 2rem;
+        font-size: 0.8rem;
+        list-style-type: none; 
+        display: flex;
+        align-items: center;
+        margin-top: 0;
+
+        svg{
+            font-size: 22px;
+            margin-right: 0.5rem;
+            color: #ff0000;
+        }
+
+        h3 {
+            margin-bottom: 0;
+            font-size: 13px;
+        }
     }
 `
 
 const Button = styled.button `
-    padding: 1rem 2rem;
+    padding: 0.5rem 1rem;
     color: #000;
+    border-radius: 0.5rem;
     background: #fff;
     border: 2px solid #000;
     margin-right: 2rem;
     font-weight: 600;
+    margin-bottom: 2rem;
+    cursor: pointer;
 `
 
 const Info = styled.div `
-    margin-left: 10rem;
+    margin: 1rem;
 `
 
 

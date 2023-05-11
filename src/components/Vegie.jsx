@@ -13,20 +13,10 @@ const Vegie = () => {
     }, [])
 
     const getVegie = async () => {
-        const check = localStorage.getItem('vegie')
-
-        if(check) {
-            setVegie(JSON.parse(check))
-        } else {
-            const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey={apiKey}&number=18&tags=vegetarian`)
-            const data = await api.json()
-
-            localStorage.setItem( 'vegie', JSON.stringify(data.recipes))
-
-            console.log(data)
-            setVegie(data.recipes)
-        }
-
+        const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=948780b90e614431baba9b1f90a1674f&number=18&tags=vegetarian`)
+        const data = await api.json()
+        // console.log(data)
+        setVegie(data.recipes)
         
     } 
 
@@ -64,12 +54,12 @@ const Wrapper = styled.div `
 `
 const Card = styled.div `
     min-height: 10rem;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     overflow: hidden;
     position: relative;
 
     img{
-        border-radius: 1rem;
+        border-radius: 0.5rem;
         width: 100%;
         position: absolute;
         left: 0;

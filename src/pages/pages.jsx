@@ -10,7 +10,7 @@ const pages = () => {
     const location = useLocation()
 
     return (
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence>
             <Routes location={location} key={location.pathname} >
                 <Route path="/" element={ <Home /> } />
                 <Route path="/cuisine/:type" element={ <Cuisine /> } />    

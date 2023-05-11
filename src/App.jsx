@@ -19,6 +19,10 @@ function App() {
           <Category />
           <Pages />
         </BrowserRouter>
+        <Footer>
+          <h4>&copy; 2023</h4>
+          <p>SpoonacularAPI</p>
+        </Footer>
       </div>
     </>
   )
@@ -41,6 +45,15 @@ const Nav = styled.div `
   svg {
     font-size: 2rem;
   }
+`
+
+const Footer = styled.footer `
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #aaaaaa;
 `
 
 export default App

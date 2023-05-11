@@ -13,20 +13,10 @@ const Popular = () => {
     }, [])
 
     const getPopular = async () => {
-        const check = localStorage.getItem('popular')
-
-        if(check) {
-            setPopular(JSON.parse(check))
-        } else {
-            const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey={apiKey}&number=18`)
-            const data = await api.json()
-
-            localStorage.setItem( 'popular', JSON.stringify(data.recipes))
-
-            console.log(data)
-            setPopular(data.recipes)
-        }
-
+        const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=948780b90e614431baba9b1f90a1674f&number=18`)
+        const data = await api.json()
+        // console.log(data)
+        setPopular(data.recipes)
         
     } 
 
@@ -35,7 +25,7 @@ const Popular = () => {
             <Wrapper>
                 <h3>Popular Picks</h3>
                 <Splide options={{
-                    perPage: 3,
+                    perPage: 4,
                     pagination: false,
                     drag: 'free',
                     gap: '2rem'
@@ -64,12 +54,12 @@ const Wrapper = styled.div `
 `
 const Card = styled.div `
     min-height: 10rem;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     overflow: hidden;
     position: relative;
 
     img{
-        border-radius: 1rem;
+        border-radius: 0.5rem;
         width: 100%;
         position: absolute;
         left: 0;

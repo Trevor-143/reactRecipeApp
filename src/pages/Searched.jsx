@@ -17,7 +17,7 @@ function Searched() {
 
   const getSearched = async (name) => {
 
-    const data = await fetch (`https://api.spoonacular.com/recipes/complexSearch?apiKey={apiKey}&query=${name}&number=18`)
+    const data = await fetch (`https://api.spoonacular.com/recipes/complexSearch?apiKey=948780b90e614431baba9b1f90a1674f&query=${name}&number=18`)
     const recipes = await data.json()
     setSearched(recipes.results)
     console.log(recipes)
@@ -54,6 +54,7 @@ const Card = styled.div `
   }
   a {
     text-decoration: none;
+    color: #000;
   }
   h4 {
     text-align: center;
