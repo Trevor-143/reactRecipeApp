@@ -16,7 +16,7 @@ function Cuisine() {
   }, [params.type])
 
   const getCuisine = async (name) => {
-    const data = await fetch (`https://api.spoonacular.com/recipes/complexSearch?apiKey=948780b90e614431baba9b1f90a1674f&cuisine=${name}&number=18`)
+    const data = await fetch (`https://api.spoonacular.com/recipes/complexSearch?apiKey={apiKey}&cuisine=${name}&number=18`)
     const recipes = await data.json()
     setCuisine(recipes.results)
     
